@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<input type="button" value="获取数据" @click="getlist()" />
+			<input type="button" value="注册" @click="regPost()" />
+			<br />
+			<ul>
+				<li v-for="(item,index) in list">
+					
+					<span>{{index+1}}.{{item}}</span>
+				</li>
+			</ul>
+		</div>
+		<script src="./js/vue.js"></script>
+		<!-- axios 一个强大的网络请求库，与vue配套使用 -->
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script>
+			// https://autumnfish.cn/api/joke/list
+			//https://autumnfish.cn/api/user/reg
+			var app = new Vue({
+				el:"#app",
+				data:{
+					list:[],
+					
+				},
+				methods:{
+					getlist:function () {
+						var that = this;
+						axios.get("https://autumnfish.cn/api/joke/list?num=5")
+						.then(function (response) {
+							console.log(response);
+							that.list=response.data.jokes;
+							//this.list = response.data.jokes   
+							//上句语法会undifind
+							//原因是在vue中使用axios函数时，在函数内部使用this，此时this的作用域变为axios请求后的function
+							//所以在此使用this去寻找vue中定于的参数会提示undifind
+							//解决办法：
+							//1.在函数之前，使用其他参数定义vue的this，转换对象
+							//2.使用ES6中的箭头函数如下文
+							// axios.get("ip")
+							// .then((response =>{
+							// 	this.joke = ""    此时this的作用就是由上下文确定，也就是作用于外层调用者Vue
+							// }))
+							
+						},function (err) {
+							console.log(err);
+						}
+						)
+						
+					},
+					regPost:function () {
+						axios.post("https://autumnfish.cn/api/user/reg",{username:"yangyang651"})
+						.then(function (response) {
+							console.log(response);
+						})
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

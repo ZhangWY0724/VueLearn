@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="./css/index.css" />
+	</head>
+	<body>
+	  <!-- 主体区域 -->
+	  <section id="todoapp">
+	    <!-- 输入框 -->
+	    <header class="header">
+	      <h1>记事本</h1>
+	      <input v-model="inputValue" @mousedown.once="clearText" @keyup.enter="add" autofocus="autofocus" autocomplete="off" placeholder="请输入任务"
+	        class="new-todo" />
+	    </header>
+	    <!-- 列表区域 -->
+	    <section class="main">
+	      <ul class="todo-list">
+	        <li class="todo" v-for="(item,index) in list">
+	          <div class="view">
+	            <span class="index">{{ index+1 }}.</span>
+	            <label>{{ item }}</label>
+	            <button class="destroy" @click="remove(index)"></button>
+	          </div>
+	        </li>
+	      </ul>
+	    </section>
+	    <!-- 统计和清空 -->
+	    <footer class="footer" v-show="list.length>1">
+	      <span class="todo-count">
+	        <strong>{{list.length}}</strong> items left
+	      </span>
+	      <button class="clear-completed" @click="clear()">
+	        Clear
+	      </button>
+	    </footer>
+	  </section>
+	  <!-- 底部 -->
+	  <footer class="info">
+	    <p>
+	      <a href="http://www.baidu.com/"><img src="./img/logo.png" alt="" /></a>
+	    </p>
+	  </footer>
+	  <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+	  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	  <script>
+	    var app = new Vue({
+			el:"#todoapp",
+			data:{
+				list:["写代码","吃饭","睡觉"],
+				inputValue:"12312312"
+			},
+			methods:{
+				remove:function (p1) {
+					this.list.splice(p1,1);
+				},
+				add:function () {
+					this.list.push(this.inputValue);
+				},
+				clear:function () {
+					this.list = [];
+				},
+				clearText:function () {
+					this.inputValue=""
+				}
+			}
+		})
+	  </script>
+	</body>
+</html>

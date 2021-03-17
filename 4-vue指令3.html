@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="(item,index) in arr">
+					{{item}} + {{index}}
+				</li>
+			</ul>
+			<ul>
+				<li v-for="(item,index) in food">
+					{{index+1}}:{{item.name}}种类是：{{item.type}}
+				</li>
+			</ul>
+		</div>
+		
+		<script src="./js/vue.js"></script>
+		<script> 
+			var app = new Vue({
+				el:"#app",
+				data:{
+					arr:[1,2,3,4,5,6],
+					food:[
+						{name:"苹果",type:"水果"},
+						{name:"香蕉",type:"水果"},
+						{name:"牛肉",type:"肉类"},
+						{name:"蛋挞",type:"糕点"},
+						{name:"哈密瓜",type:"水果"},
+						{name:"羊肉",type:"肉类"},
+					]
+				}
+			})
+		</script>
+	</body>
+</html>

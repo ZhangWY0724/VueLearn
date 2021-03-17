@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<button @click="reduce()">-</button>
+			<span>{{num}}</span>
+			<button @click="add()">+</button>
+		</div>
+		<script src="./js/vue.js"></script>
+		<script>
+			var app = new Vue({
+				el:"#app",
+				data:{
+					num:"0"
+				},
+				methods:{
+					add:function () {
+						if (this.num<10) {
+							this.num++;
+						}else{
+							alert("已经到最大值了！")
+						}
+						
+						
+					},
+					reduce:function () {
+						if (this.num<0) {
+							this.num--;
+						}else{
+							alert("已经到最小值了！")
+						}
+						
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

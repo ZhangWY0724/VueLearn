@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<div>
+				<!-- v-text指令会覆盖标签原本内容 -->
+				<h2 v-text="message">122</h2>
+				<h3>{{message}}</h3>
+				<!-- 字符串拼接 -->
+				<h4 v-text="message+'123'"></h4>
+				<h4>{{message+"123"}}</h4>
+			</div>
+			<hr />
+			<div>
+				<!-- v-html 会解析数据中的html标签并展示 -->
+				<h2 v-html="dataurl"></h2>
+				<h2 v-text="dataurl"></h2>
+			</div>
+			<hr />
+			<div>
+				<!-- v-on 事件绑定 -->
+				<input type="button" value="v-on绑定事件" v-on:click="doit" />
+				<input type="button" value="双击事件简单绑定" @dblclick="dbit" />
+				<input type="button" value="改变数据" @click="changemessage()" />
+			</div>
+			<hr />
+			<div>
+				<!-- v-show 展示隐藏 -->
+				<img src="img/logo.png" v-show="isshow" />
+				<button @click="changeShow()">{{isshowTitle}}</button>
+				<br />
+				<!-- v-if 展示隐藏 -->
+				<img src="img/logo.png" v-if="isShow2" />
+				<button @click="changeShow2()">{{isshowTitle}}</button>
+				<br />
+				<span>v-show与v-if的区别</span>
+				<span>v-show的展示与隐藏，主要是控制标签的样式设置隐藏属性，标签一直存在，v-if展示与隐藏主要是控制标签的是否加载，dom元素的存在
+					而非控制样式
+				</span>
+			</div>
+		</div>
+		
+		
+		<script src="js/vue.js"></script>
+		<script>
+			var app = new Vue({
+				el:"#app",
+				data:{
+					message:"信息",
+					dataurl:"<a href='http://www.baidu.com'>百度</a>",
+					isshow:true,
+					isShow2:true,
+					isshowTitle:"隐藏"
+				},
+				methods:{
+					doit:function () {
+						alert(123);
+					},
+					dbit:function () {
+						alert(456);
+					},
+					changemessage:function () {
+						this.message = "信息被改变"
+					},
+					changeShow:function () {
+						if (this.isshowTitle=="显示") {
+							this.isshowTitle = "隐藏"
+						}else if(this.isshowTitle=="隐藏"){
+							this.isshowTitle = "显示"
+						}
+						this.isshow = !this.isshow
+					},
+					changeShow2:function () {
+						this.isShow2 = !this.isShow2;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

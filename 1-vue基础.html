@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!-- 作用范围只会包含在el里面的元素包括后代元素，且插值表达式作用于双标签 -->
+		{{text}}
+		<div id="app" class="app_1">{{text}}
+			<span>{{text}}</span><br />
+			<!-- 对象 -->
+			<span>{{school.name}} {{school.age}}</span>
+			<!-- 数组 --><br />
+			<span>{{campus[0]}}</span>
+			
+		</div>
+		<script src="js/vue.js"></script>   
+		<script>
+			var test = new Vue({
+				// id,class,标签选择器都可用 ，但建议使用id选择器
+				 el:"#app",
+				//el:".app_1",
+				//el:"div",
+				data:{
+					text:"这是一个插值表达式",
+					school:{
+						name:"张三",
+						age:"18"
+					},
+					campus:["北京","shanghai","wuhan","shenzhen"]
+				}
+			})
+		</script>
+	</body>
+</html>

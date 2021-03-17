@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.pngsize{
+				width: 400px;
+				height: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="pngChange">
+			
+			<img :src="pngay[index]" class="pngsize" /><br />
+			<button @click="prev" v-show="index>0">上一张</button>
+			<button @click="next" v-show="index<pngay.length-1">下一张</button>
+		</div>
+		<script src="./js/vue.js"></script>
+		<script>
+			var app = new Vue({
+				el:"#pngChange",
+				data:{
+					pngay:[
+						"./img/p1.JPG",
+						"./img/p2.JPG",
+						"./img/p3.JPG",
+						"./img/p4.JPG",
+						"./img/p5.JPG",
+						"./img/p6.JPG",
+						"./img/p7.JPG",
+						"./img/p8.JPG",
+						"./img/p9.JPG",
+					],
+					index:0
+				},
+				methods:{
+					prev:function () {
+						this.index--;
+					},
+					next:function () {
+						this.index++;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
